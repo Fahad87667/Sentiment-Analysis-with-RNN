@@ -77,8 +77,7 @@ else:
 st.markdown(
     """
     <hr>
-    <div style="text-align: center; font-size: 14px;">
-        
+    <div style="text-align: center; font-size: 14px;">  
     </div>
     """, 
     unsafe_allow_html=True
