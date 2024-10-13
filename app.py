@@ -78,7 +78,7 @@ st.markdown(
     """
     <hr>
     <div style="text-align: center; font-size: 14px;">
-        Made with ❤️ using Streamlit
+        
     </div>
     """, 
     unsafe_allow_html=True
