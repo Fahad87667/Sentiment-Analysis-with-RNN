@@ -26,24 +26,59 @@ def preprocess_text(text):
 
 
 import streamlit as st
-## streamlit app
-# Streamlit app
-st.title('IMDB Movie Review Sentiment Analysis')
-st.write('Enter a movie review to classify it as positive or negative.')
 
-# User input
-user_input = st.text_area('Movie Review')
+# Set the page layout
+st.set_page_config(page_title='IMDB Sentiment Analysis', layout='centered')
 
-if st.button('Classify'):
+# App Title and Header
+st.markdown(
+    """
+    <div style="text-align: center;">
+        <h2 style="color: #4CAF50;">🎬 MovieMood: IMDB Sentiment Classifier </h2>
+        <p style="font-size: 18px;">Enter a movie review to analyze its sentiment.</p>
+    </div>
+    """, 
+    unsafe_allow_html=True
+)
 
-    preprocessed_input=preprocess_text(user_input)
+# User Input Section with Columns
+st.write('')
+col1, col2, col3 = st.columns([1, 2, 1])
+with col2:
+    user_input = st.text_area('Movie Review', placeholder='Type your review here...')
 
-    ## MAke prediction
-    prediction=model.predict(preprocessed_input)
-    sentiment='Positive' if prediction[0][0] > 0.5 else 'Negative'
+# Classify Button
+if st.button('🎯 Classify Sentiment'):
+    if user_input:
+        # Preprocess the input (dummy function for now)
+        preprocessed_input = preprocess_text(user_input)
 
-    # Display the result
-    st.write(f'Sentiment: {sentiment}')
+        # Make Prediction (dummy model code here)
+        prediction = model.predict(preprocessed_input)
+        sentiment = 'Positive' if prediction[0][0] > 0.5 else 'Negative'
+
+        # Display Result with Emoji Feedback
+        emoji = '😊' if sentiment == 'Positive' else '😞'
+        st.markdown(
+            f"""
+            <div style="text-align: center; margin-top: 20px;">
+                <h2>Sentiment: {sentiment} {emoji}</h2>
+            </div>
+            """, 
+            unsafe_allow_html=True
+        )
+    else:
+        st.warning('Please enter a movie review.')
 else:
-    st.write('Please enter a movie review.')
+    st.info('Awaiting your input!')
 
+# Footer
+st.markdown(
+    """
+    <hr>
+    <div style="text-align: center; font-size: 14px;">
+        Made with ❤️ using Streamlit
+    </div>
+    """, 
+    unsafe_allow_html=True
+)
